@@ -148,72 +148,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="cn">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/02/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="WangLi">
-      <meta itemprop="description" content="这是TC的个人博客">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Tauren Chieftain">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/02/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-01-02 19:48:32" itemprop="dateCreated datePublished" datetime="2021-01-02T19:48:32+08:00">2021-01-02</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="cn">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/02/java-jmm/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -228,7 +162,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/01/02/java-jmm/" class="post-title-link" itemprop="url">javajmm</a>
+            <a href="/2021/01/02/java-jmm/" class="post-title-link" itemprop="url">java内存结构</a>
         </h2>
 
         <div class="post-meta">
@@ -239,7 +173,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2021-01-02 14:02:03 / Modified: 19:48:32" itemprop="dateCreated datePublished" datetime="2021-01-02T14:02:03+08:00">2021-01-02</time>
+              <time title="Created: 2021-01-02 20:02:03 / Modified: 21:14:12" itemprop="dateCreated datePublished" datetime="2021-01-02T20:02:03+08:00">2021-01-02</time>
             </span>
 
           
@@ -253,7 +187,199 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          
+          <p><img src="/2021/01/02/java-jmm/java-runtime-structure.png" alt="Java总体结构"></p>
+<h3 id="内存结构"><a href="#内存结构" class="headerlink" title="内存结构"></a>内存结构</h3><p><img src="/2021/01/02/java-jmm/java-memory-structure.png" alt="Java内存结构"></p>
+<h4 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h4><p><code>Java</code> 堆是是虚拟机中最主要的内存区域，它为线程共享，在虚拟机启动时创建，几乎所有的对象实例都存储在 <code>Java</code> 堆中。也被称作 <code>&quot;GC&quot;</code> 堆，从内存回收角度看，可分为新生代和老年代。而新生代又可分为 <code>Eden</code> 区、<code>From Survivor</code> 区、<code>To Survivor</code> 区等。 <code>Java</code> 堆的实现，既可以实现为固定的，也可以是扩展的，当前虚拟机都按照可扩展来实现，通过 <code>-Xmx</code> 和 <code>-Xms</code> 控制堆大小。如果堆中没有内存并且也无法再扩展时，会抛出 <code>OutOfMemeoryError</code> 异常。</p>
+<p><img src="/2021/01/02/java-jmm/java-memory-structure-heap.png" alt="Java内存堆结构"></p>
+<h4 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h4><p><code>Java</code> 虚拟机栈也是线程私有的，在线程创建时 <code>Java</code> 栈会被创建，每个方法在在执行的同时都会创建一个栈帧，用于存放局部变量表，操作数栈，动态链接，方法出口等信息，每一个方法从调用直至执行完成，都对应着一个栈帧在虚拟机栈中入栈到出栈的过程。局部变量表部分存放了各种基本数据类型( <code>8</code> 种)，对象引用(<code>reference</code> 类型) 和 <code>returnAddress</code> 类型，局部变量表所需的空间在编译期就已经确定并完成分配，在方法运行期间不会被改变。</p>
+<p><code>Java</code> 虚拟栈中可能出现两种异常： 线程请求的栈深度大于虚拟机所允许的深度的<code>StackOverflowError</code>和虚拟机栈扩展时无法申请到足够的内存的<code>OutOfMemoryError</code>。</p>
+<p><img src="/2021/01/02/java-jmm/java-memory-structure-stack.png" alt="Java内存栈结构"></p>
+<h4 id="本地方法栈"><a href="#本地方法栈" class="headerlink" title="本地方法栈"></a>本地方法栈</h4><p>本地方法栈与 <code>Java</code> 虚拟机栈的作用类似，区别是 <code>Java</code> 虚拟机栈为虚拟机执行 <code>Java</code> 方法服务，而本地方法栈为虚拟机执行 <code>Native</code> 方法服务。的虚拟机（例如 <code>HotSpot</code> 虚拟机）直接把本地方法栈和 <code>Java</code> 虚拟机栈合并在一起。本地方法栈也可能会抛出 <code>StackOverflowError</code> 和 <code>OutOfMemoryError</code> 异常。</p>
+<h4 id="方法区"><a href="#方法区" class="headerlink" title="方法区"></a>方法区</h4><p>方法区与 <code>Java</code> 堆一样，为线程共享，用于存储已被虚拟机加载的类信息，常量，静态变量，即时编译器编译后的代码等数据，也叫作 <code>Non-Heap</code>（非堆）。如果方法区无法满足内存分配需求，会抛出 <code>OutOfMemoryError</code> 异常。</p>
+<h5 id="运行时常量池"><a href="#运行时常量池" class="headerlink" title="运行时常量池"></a>运行时常量池</h5><p>运行时常量池是方法区的一部分，<code>Class</code> 文件中的常量池用于编译期生成的各种字面量和符号引用，这部分内容在类加载后被存入运行时常量池。动态性是运行时常量池相对于 <code>Class</code> 文件常量池的一个重要特征，即不要求常量一定只有编译期才能产生，运行期间也可能将新的常量放入池中。运行时常量池受到方法区内存的限制，如果常量池无法再申请内存，就会抛出 <code>OutOfMemoryError</code> 异常。</p>
+<h5 id="永久代"><a href="#永久代" class="headerlink" title="永久代"></a>永久代</h5><p>有时会看到方法区被称为永久代，其实两者有着本质的区别。方法区是 <code>JVM</code> 规范中的定义，而永久代是 <code>JVM</code> 规范的一种实现，并且只有在 <code>HotSpot</code> 虚拟机中如此，其他虚拟机中没有永久代的说法。</p>
+<p> 在 <code>JDK1.6</code> 之前，<code>HotSpot</code> 虚拟机把 <code>GC</code> 分代收集扩展至方法区，或者说使用永久代实现方法区。不过永久代有 <code>-XX:MaxPermSize</code> 的上限，很容易遇到内存溢出问题，所以在 <code>JDK1.7</code> 中，将部分数据已经转移 <code>Java Heap</code> 或 <code>Native Heap</code> 中。例如：将原本放在永久代中的字符串池和类的静态变量移出到 <code>Java Heap</code> 中，将符号引用转移到 <code>Native Heap</code> 中，但永久代仍然存在，并没有移除。</p>
+<h5 id="元空间"><a href="#元空间" class="headerlink" title="元空间"></a>元空间</h5><p>在 <code>JDK1.8</code> 中，取消了永久代，代替为元空间实现，它也是 <code>JVM</code> 规范中方法区的一种实现。不过它与永久代最大的不同是：元空间并不在虚拟机中，而是将元空间放到本地内存中，所以默认情况下，它只受本地内存的限制，可以通过 <code>-XX:MetaspaceSize</code> 参数设置初始空间大小，默认没有最大空间限制。</p>
+<h4 id="程序计数器"><a href="#程序计数器" class="headerlink" title="程序计数器"></a>程序计数器</h4><p>程序计数器是当前线程所执行的字节码的行号指示器，它会指出下一条将要执行的指令的地址，字节码解释器就是通过改变计数器的值来选取程序接下来执行的操作。程序计数器是线程私有的一小块内存，每条线程都要有一个独立的程序计数器，以使线程切换后恢复到正确的执行位置。它也是唯一一个不会出现 <code>OutOfMemoryError</code> 的内存区域。</p>
+<h4 id="直接内存"><a href="#直接内存" class="headerlink" title="直接内存"></a>直接内存</h4><p>直接内存并不由 <code>JVM</code> 管理，它是利用 <code>Native</code> 函数库在 <code>Java</code> 堆外申请分配的内存区域，可以避免在 <code>Java</code> 堆和 <code>Native</code> 堆中复制数据以提高性能。</p>
+<p>例如 <code>NIO</code> 中的 <code>DirectByteBuffer</code> 就可以作为这块内存的引用进行操作直接内存。</p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p><img src="/2021/01/02/java-jmm/java-memory-structure-summary.png" alt="Java内存结构总结"></p>
+<h3 id="内存模型"><a href="#内存模型" class="headerlink" title="内存模型"></a>内存模型</h3><h4 id="物理内存模型"><a href="#物理内存模型" class="headerlink" title="物理内存模型"></a>物理内存模型</h4><h5 id="硬件处理效率"><a href="#硬件处理效率" class="headerlink" title="硬件处理效率"></a>硬件处理效率</h5><p><img src="/2021/01/02/java-jmm/headware-cpu-memory.png" alt="硬件CPU内存结构"></p>
+<p>处理器与内存访问速度差距非常大，添加读写速度尽可能接近处理器的高速缓存，可以让处理器更快的访问数据。将数据读到缓存中，让运算快速进行，当运算结束，再从缓存同步到主存中，就无须等待缓慢的内存读写了。处理器访问缓存的速度快于访问主存的速度，但比访问内部寄存器的速度还是要慢点。每个cpu有一个cpu的缓存层，一个cpu含有多层缓存。某一时刻，一个或者多个缓存行可能同时被读取到缓存取，也可能同时被刷新到主存中，同一时刻，可能存在多个操作。</p>
+<p>寄存器：每个cpu都包含一系列寄存器，他们是cpu的基础，寄存器执行的速度，远大于在主存上执行的速度。<br>内存：一个计算机包含一个主存，所有cpu都可以访问主存，主存通常远大于cpu中的缓存。</p>
+<p>通常，当一个cpu需要读取主存时，他会将主存的内容读取到缓存中，将缓存中的内容读取到内部寄存器中，在寄存器中执行操作。当cpu需要将结果回写到主存中时，他会将内部寄存器的值刷新到缓存中，然后会在某个时间点将值刷新回主存。</p>
+<h5 id="缓存一致性问题"><a href="#缓存一致性问题" class="headerlink" title="缓存一致性问题"></a>缓存一致性问题</h5><p><img src="/2021/01/02/java-jmm/headware-cpu-cache.png" alt="硬件CPU多级缓存结构"></p>
+<p><img src="/2021/01/02/java-jmm/headware-cpu-consistence.png" alt="硬件CPU缓存一致性"></p>
+<ul>
+<li>高速缓存解决了硬件效率问题，但是引入了一个新的问题：<strong>缓存一致性（Cache Coherence）</strong>。</li>
+<li>在多处理器系统中，每个处理器都有自己的高速缓存，而它们又共享同一主内存。</li>
+<li>当多个处理器的运算任务都涉及同一块主内存区域时，将可能导致各自的缓存数据不一致。</li>
+<li>为了解决缓存一致性问题，需要各个处理器访问缓存时都遵循一些协议，在读写时要根据协议来进行操作。</li>
+</ul>
+<h5 id="指令重排"><a href="#指令重排" class="headerlink" title="指令重排"></a>指令重排</h5><ul>
+<li><strong>除了高速缓存以外，为了使得处理器内部的运算单元尽量被充分利用</strong>，处理器可能会对输入代码进行乱序执行（Out-Of-Order Execution）优化。<ul>
+<li>编译器优化的重排序。编译器在不改变单线程程序语义的前提下，可以重新安排语句的执行顺序。</li>
+<li>指令级并行的重排序。处理器采用了<code>指令级并行技术</code>来将多条指令重叠执行。如果不存在数据依赖性，处理器可以改变语句对应机器指令的执行顺序。</li>
+<li>内存系统的重排序。由于处理器使用缓存和读/写缓冲区，这使得加载和存储操作看上去可能是在乱序执行。</li>
+</ul>
+</li>
+<li>处理器会在计算之后将乱序执行的结果重组，<strong>保证该结果与顺序执行的结果是一致的</strong>，但不保证程序中各个语句计算的先后顺序与输入代码中的顺序一致。<ul>
+<li>数据依赖性：编译器和处理器不会改变存在数据依赖性关系的两个操作的执行顺序，即不会重排序。</li>
+<li>as-if-serial：不管怎么重排序，单线程下的执行结果不能被改变，编译器、runtime和处理器都必须遵守as-if-serial语义。</li>
+</ul>
+</li>
+<li>乱序执行技术是处理器为提高运算速度而做出违背代码原有顺序的优化。<ul>
+<li><strong>单核</strong>环境下，处理器保证做出的优化不会导致执行结果远离预期目标，但在多核环境下却并非如此。</li>
+<li><strong>多核</strong>环境下， 如果存在一个核的计算任务依赖另一个核的计算任务的中间结果，而且对相关数据读写没做任何防护措施，那么其顺序性无法保证。</li>
+</ul>
+</li>
+<li>内存屏障：内存屏障，又称内存栅栏，是一个CPU指令，基本上它是一条这样的指令，保证特定操作的执行顺序，影响某些数据（或则是某条指令的执行结果）的内存可见性。</li>
+</ul>
+<p><img src="/2021/01/02/java-jmm/headware-cpu-instruct-rearrange.png" alt="硬件指令重排"></p>
+<h4 id="Java内存模型"><a href="#Java内存模型" class="headerlink" title="Java内存模型"></a>Java内存模型</h4><h5 id="硬件内存模型的桥接"><a href="#硬件内存模型的桥接" class="headerlink" title="硬件内存模型的桥接"></a>硬件内存模型的桥接</h5><p><img src="/2021/01/02/java-jmm/headware-java-memory.png" alt="硬件和Java内存映射"></p>
+<ul>
+<li>Java内存模型与硬件内存架构之间存在差异。</li>
+<li>硬件内存架构没有区分线程栈和堆。对于硬件，所有的线程栈和堆都分布在主内存中。</li>
+<li>部分线程栈和堆可能有时候会出现在CPU缓存中和CPU内部的寄存器中。</li>
+</ul>
+<h5 id="主内存和工作内存"><a href="#主内存和工作内存" class="headerlink" title="主内存和工作内存"></a>主内存和工作内存</h5><p><img src="/2021/01/02/java-jmm/java-memory-main-work.png" alt="Java内存主存和工作内存"></p>
+<ul>
+<li>规定了<strong>所有的变量都存储在主内存（Main Memory）中</strong>。</li>
+<li>每条线程还有自己的工作内存（Working Memory），<strong>工作内存中保留了该线程使用到的变量的主内存的副本</strong>。</li>
+<li>工作内存是 JMM 的一个抽象概念，并不真实存在，它涵盖了缓存，写缓冲区，寄存器以及其他的硬件和编译器优化。</li>
+<li>线程对变量的所有操作都必须在工作内存中进行，而不能直接读写主内存中的变量。</li>
+<li>不同的线程间也无法直接访问对方工作内存中的变量，<strong>线程间变量值的传递均需要通过主内存来完成</strong>。</li>
+</ul>
+<h5 id="内存交互操作"><a href="#内存交互操作" class="headerlink" title="内存交互操作"></a>内存交互操作</h5><p><img src="/2021/01/02/java-jmm/java-memory-operation.png" alt="Java内存操作"></p>
+<ol>
+<li>lock（锁定）：作用于主内存的变量，把一个变量标识为一条线程独占状态。</li>
+<li>unlock（解锁）：作用于主内存变量，把一个处于锁定状态的变量释放出来，释放后的变量才可以被其他线程锁定。</li>
+<li>read（读取）：作用于主内存变量，把一个变量值从主内存传输到线程的工作内存中，以便随后的 load 动作使用</li>
+<li>load（载入）：作用于工作内存的变量，把 read 操作从主内存中得到的变量值放入工作内存的变量副本中。</li>
+<li>use（使用）：作用于工作内存的变量，把工作内存中的一个变量值传递给执行引擎，每当虚拟机遇到一个需要使用变量的值的字节码指令时将会执行这个操作。</li>
+<li>assign（赋值）：作用于工作内存的变量，它把一个从执行引擎接收到的值赋值给工作内存的变量，每当虚拟机遇到一个给变量赋值的字节码指令时执行这个操作。</li>
+<li>store（存储）：作用于工作内存的变量，把工作内存中的一个变量的值传送到主内存中，以便随后的 write 的操作。</li>
+<li>write（写入）：作用于主内存的变量，它把 store 操作从工作内存中一个变量的值传送到主内存的变量中。</li>
+</ol>
+<h5 id="内存操作问题"><a href="#内存操作问题" class="headerlink" title="内存操作问题"></a>内存操作问题</h5><p><strong>原子性：</strong></p>
+<ul>
+<li><strong>原子性即一个操作或者多个操作，要么全部执行（执行的过程不会被任何因素打断），要么就都不执行</strong>。</li>
+<li>即使在多个线程一起执行的时候，一个操作一旦开始，就不会被其他线程所干扰。</li>
+<li>在 Java 中可以使用 <code>synchronized</code> 来保证方法和代码块内的操作是原子性的。</li>
+</ul>
+<p><strong>有序性：</strong></p>
+<ul>
+<li>有序性规则表现在以下两种场景: 线程内和线程间<ul>
+<li>线程内 - 从某个线程的角度看方法的执行，指令会按照一种叫“串行”（<code>as-if-serial</code>）的方式执行，此种方式已经应用于顺序编程语言。</li>
+<li>线程间 - 这个线程“观察”到其他线程并发地执行非同步的代码时，由于指令重排序优化，任何代码都有可能交叉执行。唯一起作用的约束是：对于同步方法，同步块（<code>synchronized</code> 关键字修饰）以及 <code>volatile</code> 字段的操作仍维持相对有序。</li>
+</ul>
+</li>
+<li>多线程保证有序性：<ul>
+<li><code>volatile</code> 关键字会禁止指令重排序。</li>
+<li><code>synchronized</code> 关键字通过互斥保证同一时刻只允许一条线程操作。</li>
+</ul>
+</li>
+</ul>
+<p><strong>可见性：</strong></p>
+<ul>
+<li><p><strong>可见性是指当多个线程访问同一个变量时，一个线程修改了这个变量的值，其他线程能够立即看得到修改的值</strong>。</p>
+</li>
+<li><p>JMM 是通过 <strong>“变量修改后将新值同步回主内存</strong>， <strong>变量读取前从主内存刷新变量值”</strong> 这种依赖主内存作为传递媒介的方式来实现的。</p>
+</li>
+<li><p>Java 实现多线程可见性的方式有：<code>volatile</code>、<code>synchronized</code>、<code>final</code>。</p>
+</li>
+</ul>
+<h4 id="内存模型规则"><a href="#内存模型规则" class="headerlink" title="内存模型规则"></a>内存模型规则</h4><h5 id="happens-before"><a href="#happens-before" class="headerlink" title="happens-before"></a>happens-before</h5><ul>
+<li>JMM 为了保证有序，还内置了一套先行发生规则（happens-before）两个操作间具有 happens-before 关系。</li>
+<li>并不意味着前一个操作必须要在后一个操作之前执行。</li>
+<li>happens-before 仅仅要求前一个操作对后一个操作可见，和一般意义上时间的先后是不一样的，达到逻辑上的顺序执行即可。</li>
+<li>具体的规则如下：<ul>
+<li>程序次序规则：一个线程内，按照代码顺序，书写在前面的操作先行发生与书写在后面的操作。【保证单线程的有序】</li>
+<li>锁定规则：一个 unlock 操作先行发生于后面对同一个锁的 lock 操作。</li>
+<li>volatile 变量规则：对一个变量的写操作先行发生于后面对这个变量的读操作。【先写后读】</li>
+<li>传递规则：A 先于 B 且 B 先于 C 则 A 先于 C</li>
+<li>线程启动规则：Thread 对象的 start 方法先行发生于此线程的每一个动作。</li>
+<li>线程中断规则：对线程 interrupt 方法的调用先行发生于被中断线程的代码检测到中断事件的发生。【先中断，后检测】</li>
+<li>线程终结规则：线程中所有的操作都先行发生于线程的终止检测，我们可以通过 Thread.join() 方法结束，Thread.isAlive() 的返回值手段检测线程已经终止执行。</li>
+<li>对象终结规则：一个对象的初始化完成先行发生于它的 finalize 方法的开始。</li>
+</ul>
+</li>
+<li>如果两个操作的执行顺序不能通过 happens-before 原则推导出来，就不能保证他们的执行次序，虚拟机就可以随意的对他们进行重排序。</li>
+</ul>
+<h5 id="内存屏障"><a href="#内存屏障" class="headerlink" title="内存屏障"></a>内存屏障</h5><ul>
+<li>内存屏障是被插入两个 CPU 指令之间的一种指令，用来禁止处理器指令发生重排序（像屏障一样），从而保障<strong>有序性</strong>的。</li>
+<li>另外，为了达到屏障的效果，它也会使处理器写入、读取值之前，将主内存的值写入高速缓存，清空无效队列，从而保障<strong>可见性</strong>。</li>
+<li>常见有 4 种屏障：<ul>
+<li><code>LoadLoad</code> 屏障 - 对于这样的语句 <code>Load1; LoadLoad; Load2</code>，在 Load2 及后续读取操作要读取的数据被访问前，保证 Load1 要读取的数据被读取完毕。</li>
+<li><code>StoreStore</code> 屏障 - 对于这样的语句 <code>Store1; StoreStore; Store2</code>，在 Store2 及后续写入操作执行前，保证 Store1 的写入操作对其它处理器可见。</li>
+<li><code>LoadStore</code> 屏障 - 对于这样的语句 <code>Load1; LoadStore; Store2</code>，在 Store2 及后续写入操作被执行前，保证 Load1 要读取的数据被读取完毕。</li>
+<li><code>StoreLoad</code> 屏障 - 对于这样的语句 <code>Store1; StoreLoad; Load2</code>，在 Load2 及后续所有读取操作执行前，保证 Store1 的写入对所有处理器可见。它的开销是四种屏障中最大的（冲刷写缓冲器，清空无效化队列）。在大多数处理器的实现中，这个屏障是个万能屏障，兼具其它三种内存屏障的功能。</li>
+</ul>
+</li>
+<li>Java 中对内存屏障的使用在一般的代码中不太容易见到，常见的有 <code>volatile</code> 和 <code>synchronized</code> 关键字修饰的代码块(后面再展开介绍)，还可以通过 <code>Unsafe</code> 这个类来使用内存屏障。</li>
+</ul>
+<h3 id="volatile"><a href="#volatile" class="headerlink" title="volatile"></a>volatile</h3><h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><p>被volatile修饰之后，那么就具备了两层语义：首先保证了不同线程对这个变量进行操作时的可见性，即一个线程修改了某个变量的值，这新值对其他线程来说是立即可见的；其次禁止进行指令重排序。</p>
+<p>前面讲述了源于volatile关键字的一些使用，下面我们来探讨一下volatile到底如何保证可见性和禁止指令重排序的。观察加入volatile关键字和没有加入volatile关键字时所生成的汇编代码发现，加入volatile关键字时，会多出一个lock前缀指令。lock前缀指令实际上相当于一个内存屏障（也成内存栅栏），内存屏障会提供3个功能：首先它确保指令重排序时不会把其后面的指令排到内存屏障之前的位置，也不会把前面的指令排到内存屏障的后面；其次它会强制将对缓存的修改操作立即写入主存；如果是写操作，它会导致其他CPU中对应的缓存行无效。</p>
+<p>JMM会在写入这个volatile字段之后插进一个<code>Write-Barrier</code>指令，并在读这个字段之前插入一个<code>Read-Barrier</code>指令。</p>
+<h4 id="可见性"><a href="#可见性" class="headerlink" title="可见性"></a>可见性</h4><p>对volatile变量的写操作与普通变量的主要区别有两点：首先修改volatile变量时会强制将修改后的值刷新的主内存中；其次修改volatile变量后会导致其他线程工作内存中对应的变量值失效。因此，再读取该变量值的时候就需要重新从读取主内存中的值。</p>
+<h4 id="有序性"><a href="#有序性" class="headerlink" title="有序性"></a>有序性</h4><p>为了实现volatile可见性和happen-befor的语义，JVM底层是通过一个叫做“内存屏障”的东西来完成。内存屏障，也叫做内存栅栏，是一组处理器指令，用于实现对内存操作的顺序限制。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">0</span>;</span><br><span class="line">bool flag = <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">write</span><span class="params">()</span> </span>&#123;</span><br><span class="line">   a = <span class="number">2</span>;              <span class="comment">//1</span></span><br><span class="line">   flag = <span class="keyword">true</span>;        <span class="comment">//2</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">multiply</span><span class="params">()</span> </span>&#123;</span><br><span class="line">   <span class="keyword">if</span> (flag) &#123;         <span class="comment">//3</span></span><br><span class="line">       <span class="keyword">int</span> ret = a * a;<span class="comment">//4</span></span><br><span class="line">   &#125;</span><br><span class="line">   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="原子性"><a href="#原子性" class="headerlink" title="原子性"></a>原子性</h4><p>自增操作不是原子性操作，而且volatile也无法保证对变量的任何操作都是原子性的。把上面的代码改成以下任何一种都可以达到效果：synchronized、Lock、AtomicInteger。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">volatile</span> <span class="keyword">int</span> inc = <span class="number">0</span>;</span><br><span class="line">     </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">increase</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        inc++;</span><br><span class="line">    &#125;</span><br><span class="line">     </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">final</span> Test test = <span class="keyword">new</span> Test();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)&#123;</span><br><span class="line">            <span class="keyword">new</span> Thread()&#123;</span><br><span class="line">                <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                    <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;<span class="number">1000</span>;j++)</span><br><span class="line">                        test.increase();</span><br><span class="line">                &#125;;</span><br><span class="line">            &#125;.start();</span><br><span class="line">        &#125;</span><br><span class="line">         </span><br><span class="line">        <span class="keyword">while</span>(Thread.activeCount()&gt;<span class="number">1</span>)  <span class="comment">//保证前面的线程都执行完</span></span><br><span class="line">            Thread.yield();</span><br><span class="line">        System.out.println(test.inc);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h4><p>synchronized关键字是防止多个线程同时执行一段代码，那么就会很影响程序执行效率，volatile关键字在某些情况下性能要优于synchronized。但是要注意volatile关键字是无法替代synchronized关键字的，因为volatile关键字无法保证操作的原子性。</p>
+<p>Java中使用volatile的几个场景：状态检查、double check。</p>
+<h3 id="synchronized"><a href="#synchronized" class="headerlink" title="synchronized"></a>synchronized</h3><h4 id="synchronized特性"><a href="#synchronized特性" class="headerlink" title="synchronized特性"></a>synchronized特性</h4><p>可重入特性：synchronized的锁对象中有一个计数器会记录线程获得几次锁。</p>
+<p>不可中断特性：一个线程获得锁后，另一个线程想要获得锁，必须处于阻塞或者等待状态，如果第一个线程不释放锁，第二个线程会一直阻塞或等待，不可中断。</p>
+<h4 id="synchronized原理"><a href="#synchronized原理" class="headerlink" title="synchronized原理"></a>synchronized原理</h4><h5 id="对象头"><a href="#对象头" class="headerlink" title="对象头"></a>对象头</h5><p>在Hotspot虚拟机中，对象在内存中的布局分为三块区域：对象头、实例数据和对齐填充。对象头是实现synchronized的锁对象的基础，一般而言，synchronized使用的锁对象是存储在Java对象头里，它是轻量级锁和偏向锁的关键；实例变量存放类的属性数据信息，包括父类的属性信息，如果是数组的实例部分还包括数组的长度，这部分内存按4字节对齐；填充数据仅仅是为了字节对齐，保存虚拟机对象起始地址是8字节的整数倍。</p>
+<p>Java对象头：Mark Word用于存储对象自身的运行时数据，如哈希码（HashCode）、GC分代年龄、锁状态标志、线程持有的锁、偏向线程 ID、偏向时间戳等等。</p>
+<p><img src="/2021/01/02/java-jmm/java-synchronized-markword.png" alt="Java字节头"></p>
+<h5 id="monitor监视器"><a href="#monitor监视器" class="headerlink" title="monitor监视器"></a>monitor监视器</h5><p>重量级锁也就是通常说synchronized的对象锁，锁标识位为10，其中指针指向的是monitor对象（也称为管程或监视器锁）的起始地址。每个对象都存在着一个 monitor 与之关联，对象与其 monitor 之间的关系有存在多种实现方式，如monitor可以与对象一起创建销毁或当线程试图获取对象锁时自动生成，但当一个 monitor 被某个线程持有后，它便处于锁定状态。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">ObjectMonitor() &#123;</span><br><span class="line">    _header       = <span class="literal">NULL</span>;</span><br><span class="line">    _count        = <span class="number">0</span>; <span class="comment">//记录个数</span></span><br><span class="line">    _waiters      = <span class="number">0</span>,</span><br><span class="line">    _recursions   = <span class="number">0</span>;</span><br><span class="line">    _object       = <span class="literal">NULL</span>;</span><br><span class="line">    _owner        = <span class="literal">NULL</span>;</span><br><span class="line">    _WaitSet      = <span class="literal">NULL</span>; <span class="comment">//处于wait状态的线程，会被加入到_WaitSet</span></span><br><span class="line">    _WaitSetLock  = <span class="number">0</span> ;</span><br><span class="line">    _Responsible  = <span class="literal">NULL</span> ;</span><br><span class="line">    _succ         = <span class="literal">NULL</span> ;</span><br><span class="line">    _cxq          = <span class="literal">NULL</span> ;</span><br><span class="line">    FreeNext      = <span class="literal">NULL</span> ;</span><br><span class="line">    _EntryList    = <span class="literal">NULL</span> ; <span class="comment">//处于等待锁block状态的线程，会被加入到该列表</span></span><br><span class="line">    _SpinFreq     = <span class="number">0</span> ;</span><br><span class="line">    _SpinClock    = <span class="number">0</span> ;</span><br><span class="line">    OwnerIsThread = <span class="number">0</span> ;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>ObjectMonitor中有两个队列，_WaitSet 和 _EntryList，用来保存ObjectWaiter对象列表( 每个等待锁的线程都会被封装成ObjectWaiter对象)，_owner指向持有ObjectMonitor对象的线程，当多个线程同时访问一段同步代码时，首先会进入 _EntryList 集合，当线程获取到对象的monitor 后进入 _Owner 区域并把monitor中的owner变量设置为当前线程同时monitor中的计数器count加1，若线程调用 wait() 方法，将释放当前持有的monitor，owner变量恢复为null，count自减1，同时该线程进入 WaitSe t集合中等待被唤醒。若当前线程执行完毕也将释放monitor(锁)并复位变量的值，以便其他线程进入获取monitor(锁)。</p>
+<p><img src="/2021/01/02/java-jmm/java-synchronized-monitor.png" alt="Java管程"></p>
+<h5 id="LockRecord"><a href="#LockRecord" class="headerlink" title="LockRecord"></a>LockRecord</h5><p>在线程进入同步代码块的时候，如果此同步对象没有被锁定，即它的锁标志位是01，则虚拟机首先在当前线程的栈中创建我们称之为“锁记录（Lock Record）”的空间，用于存储锁对象的Mark Word的拷贝，官方把这个拷贝称为Displaced Mark Word。整个Mark Word及其拷贝至关重要。</p>
+<p><strong>LockRecord是线程私有的数据结构</strong>，每一个线程都有一个可用Lock Record列表，同时还有一个全局的可用列表。每一个被锁住的对象Mark Word都会和一个Lock Record关联（对象头的MarkWord中的Lock Word指向Lock Record的起始地址），同时Lock Record中有一个Owner字段存放拥有该锁的线程的唯一标识（或者<code>object mark word</code>），表示该锁被这个线程占用。如下图所示为Lock Record的内部结构：</p>
+<table>
+<thead>
+<tr>
+<th>Lock Record</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Owner</td>
+<td>初始时为NULL表示当前没有任何线程拥有该monitor record，当线程成功拥有该锁后保存线程唯一标识，当锁被释放时又设置为NULL；</td>
+</tr>
+<tr>
+<td>EntryQ</td>
+<td>关联一个系统互斥锁（semaphore），阻塞所有试图锁住monitor record失败的线程；</td>
+</tr>
+<tr>
+<td>RcThis</td>
+<td>表示blocked或waiting在该monitor record上的所有线程的个数；</td>
+</tr>
+<tr>
+<td>Nest</td>
+<td>用来实现 重入锁的计数；</td>
+</tr>
+<tr>
+<td>HashCode</td>
+<td>保存从对象头拷贝过来的HashCode值（可能还包含GC age）。</td>
+</tr>
+<tr>
+<td>Candidate</td>
+<td>用来避免不必要的阻塞或等待线程唤醒，因为每一次只有一个线程能够成功拥有锁，如果每次前一个释放锁的线程唤醒所有正在阻塞或等待的线程，会引起不必要的上下文切换（从阻塞到就绪然后因为竞争锁失败又被阻塞）从而导致性能严重下降。Candidate只有两种可能的值0表示没有需要唤醒的线程1表示要唤醒一个继任线程来竞争锁。</td>
+</tr>
+</tbody></table>
+<h4 id="synchronized优化"><a href="#synchronized优化" class="headerlink" title="synchronized优化"></a>synchronized优化</h4><p><img src="/2021/01/02/java-jmm/java-synchronized-improve.png" alt="Java同步代码块优化"></p>
+<h5 id="偏向锁"><a href="#偏向锁" class="headerlink" title="偏向锁"></a>偏向锁</h5><p>它是一种针对加锁操作的优化手段，经过研究发现，在大多数情况下，锁不仅不存在多线程竞争，而且总是由同一线程多次获得，因此为了减少同一线程获取锁(会涉及到一些CAS操作,耗时)的代价而引入偏向锁。偏向锁的核心思想是，如果一个线程获得了锁，那么锁就进入偏向模式，此时Mark Word 的结构也变为偏向锁结构，当这个线程再次请求锁时，无需再做任何同步操作，即获取锁的过程，这样就省去了大量有关锁申请的操作，从而也就提供程序的性能。所以，对于没有锁竞争的场合，偏向锁有很好的优化效果，毕竟极有可能连续多次是同一个线程申请相同的锁。但是对于锁竞争比较激烈的场合，偏向锁就失效了，因为这样场合极有可能每次申请锁的线程都是不相同的，因此这种场合下不应该使用偏向锁，否则会得不偿失，需要注意的是，偏向锁失败后，并不会立即膨胀为重量级锁，而是先升级为轻量级锁。</p>
+<h5 id="轻量级锁"><a href="#轻量级锁" class="headerlink" title="轻量级锁"></a>轻量级锁</h5><p>倘若偏向锁失败，虚拟机并不会立即升级为重量级锁，它还会尝试使用一种称为轻量级锁的优化手段(1.6之后加入的)，此时Mark Word 的结构也变为轻量级锁的结构。轻量级锁能够提升程序性能的依据是“对绝大部分的锁，在整个同步周期内都不存在竞争”，注意这是经验数据。需要了解的是，轻量级锁所适应的场景是线程交替执行同步块的场合，如果存在同一时间访问同一锁的场合，就会导致轻量级锁膨胀为重量级锁。</p>
+<p>轻量级锁失败后，虚拟机为了避免线程真实地在操作系统层面挂起，还会进行一项称为自旋锁的优化手段。这是基于在大多数情况下，线程持有锁的时间都不会太长，如果直接挂起操作系统层面的线程可能会得不偿失，毕竟操作系统实现线程之间的切换时需要从用户态转换到核心态，这个状态之间的转换需要相对比较长的时间，时间成本相对较高，因此自旋锁会假设在不久将来，当前的线程可以获得锁，因此虚拟机会让当前想要获取锁的线程做几个空循环(这也是称为自旋的原因)，一般不会太久，可能是50个循环或100循环，在经过若干次循环后，如果得到锁，就顺利进入临界区。如果还不能获得锁，那就会将线程在操作系统层面挂起，这就是自旋锁的优化方式，这种方式确实也是可以提升效率的。最后没办法也就只能升级为重量级锁了。</p>
+<h5 id="重量级锁"><a href="#重量级锁" class="headerlink" title="重量级锁"></a>重量级锁</h5><p>重量级锁通过对象内部的监视器（monitor）实现，其中monitor的本质是依赖于底层操作系统的Mutex Lock实现，操作系统实现线程之间的切换需要从用户态到内核态的切换，切换成本非常高。</p>
+<h5 id="锁消除"><a href="#锁消除" class="headerlink" title="锁消除"></a>锁消除</h5><p>消除锁是虚拟机另外一种锁的优化，这种优化更彻底，Java虚拟机在JIT编译时(可以简单理解为当某段代码即将第一次被执行时进行编译，又称即时编译)，通过对运行上下文的扫描，去除不可能存在共享资源竞争的锁，通过这种方式消除没有必要的锁，可以节省毫无意义的请求锁时间，如下StringBuffer的append是一个同步方法，但是在add方法中的StringBuffer属于一个局部变量，并且不会被其他线程所使用，因此StringBuffer不可能存在共享资源竞争的情景，JVM会自动将其锁消除。</p>
+<h5 id="锁粗化"><a href="#锁粗化" class="headerlink" title="锁粗化"></a>锁粗化</h5><p>在使用同步锁的时候，需要让同步块的作用范围尽可能小—仅在共享数据的实际作用域中才进行同步，这样做的目的是 为了使需要同步的操作数量尽可能缩小，如果存在锁竞争，那么等待锁的线程也能尽快拿到锁。</p>
+
       
     </div>
 
@@ -286,7 +412,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/01/02/java-gc/" class="post-title-link" itemprop="url">javagc</a>
+            <a href="/2021/01/02/java-gc/" class="post-title-link" itemprop="url">java垃圾回收</a>
         </h2>
 
         <div class="post-meta">
@@ -297,7 +423,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2021-01-02 13:46:10 / Modified: 19:48:32" itemprop="dateCreated datePublished" datetime="2021-01-02T13:46:10+08:00">2021-01-02</time>
+              <time title="Created: 2021-01-02 13:46:10 / Modified: 19:58:43" itemprop="dateCreated datePublished" datetime="2021-01-02T13:46:10+08:00">2021-01-02</time>
             </span>
 
           
@@ -462,6 +588,73 @@
 <li>进行新生代垃圾收集是，Survivor空间和老年代中没有足够的空间容纳所有的幸存对象。</li>
 <li>当巨型对象找不到合适的空间进行分配时，就会启动Full GC，来释放空间。</li>
 </ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="cn">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/02/hello-world/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="WangLi">
+      <meta itemprop="description" content="这是TC的个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tauren Chieftain">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/02/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-01-02 08:00:00 / Modified: 20:04:19" itemprop="dateCreated datePublished" datetime="2021-01-02T08:00:00+08:00">2021-01-02</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 
       
     </div>
