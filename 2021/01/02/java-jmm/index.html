@@ -43,7 +43,7 @@
 <meta property="og:image" content="http://example.com/2021/01/02/java-jmm/java-synchronized-monitor.png">
 <meta property="og:image" content="http://example.com/2021/01/02/java-jmm/java-synchronized-improve.png">
 <meta property="article:published_time" content="2021-01-02T12:02:03.000Z">
-<meta property="article:modified_time" content="2021-01-02T13:14:12.000Z">
+<meta property="article:modified_time" content="2021-01-03T02:11:50.542Z">
 <meta property="article:author" content="WangLi">
 <meta property="article:tag" content="JAVA">
 <meta name="twitter:card" content="summary">
@@ -190,10 +190,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2021-01-02 20:02:03 / Modified: 21:14:12" itemprop="dateCreated datePublished" datetime="2021-01-02T20:02:03+08:00">2021-01-02</time>
+              <time title="Created: 2021-01-02 20:02:03" itemprop="dateCreated datePublished" datetime="2021-01-02T20:02:03+08:00">2021-01-02</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-01-03 10:11:50" itemprop="dateModified" datetime="2021-01-03T10:11:50+08:00">2021-01-03</time>
+              </span>
 
           
 
@@ -229,46 +235,16 @@
 <p>通常，当一个cpu需要读取主存时，他会将主存的内容读取到缓存中，将缓存中的内容读取到内部寄存器中，在寄存器中执行操作。当cpu需要将结果回写到主存中时，他会将内部寄存器的值刷新到缓存中，然后会在某个时间点将值刷新回主存。</p>
 <h5 id="缓存一致性问题"><a href="#缓存一致性问题" class="headerlink" title="缓存一致性问题"></a>缓存一致性问题</h5><p><img src="/2021/01/02/java-jmm/headware-cpu-cache.png" alt="硬件CPU多级缓存结构"></p>
 <p><img src="/2021/01/02/java-jmm/headware-cpu-consistence.png" alt="硬件CPU缓存一致性"></p>
-<ul>
-<li>高速缓存解决了硬件效率问题，但是引入了一个新的问题：<strong>缓存一致性（Cache Coherence）</strong>。</li>
-<li>在多处理器系统中，每个处理器都有自己的高速缓存，而它们又共享同一主内存。</li>
-<li>当多个处理器的运算任务都涉及同一块主内存区域时，将可能导致各自的缓存数据不一致。</li>
-<li>为了解决缓存一致性问题，需要各个处理器访问缓存时都遵循一些协议，在读写时要根据协议来进行操作。</li>
-</ul>
-<h5 id="指令重排"><a href="#指令重排" class="headerlink" title="指令重排"></a>指令重排</h5><ul>
-<li><strong>除了高速缓存以外，为了使得处理器内部的运算单元尽量被充分利用</strong>，处理器可能会对输入代码进行乱序执行（Out-Of-Order Execution）优化。<ul>
-<li>编译器优化的重排序。编译器在不改变单线程程序语义的前提下，可以重新安排语句的执行顺序。</li>
-<li>指令级并行的重排序。处理器采用了<code>指令级并行技术</code>来将多条指令重叠执行。如果不存在数据依赖性，处理器可以改变语句对应机器指令的执行顺序。</li>
-<li>内存系统的重排序。由于处理器使用缓存和读/写缓冲区，这使得加载和存储操作看上去可能是在乱序执行。</li>
-</ul>
-</li>
-<li>处理器会在计算之后将乱序执行的结果重组，<strong>保证该结果与顺序执行的结果是一致的</strong>，但不保证程序中各个语句计算的先后顺序与输入代码中的顺序一致。<ul>
-<li>数据依赖性：编译器和处理器不会改变存在数据依赖性关系的两个操作的执行顺序，即不会重排序。</li>
-<li>as-if-serial：不管怎么重排序，单线程下的执行结果不能被改变，编译器、runtime和处理器都必须遵守as-if-serial语义。</li>
-</ul>
-</li>
-<li>乱序执行技术是处理器为提高运算速度而做出违背代码原有顺序的优化。<ul>
-<li><strong>单核</strong>环境下，处理器保证做出的优化不会导致执行结果远离预期目标，但在多核环境下却并非如此。</li>
-<li><strong>多核</strong>环境下， 如果存在一个核的计算任务依赖另一个核的计算任务的中间结果，而且对相关数据读写没做任何防护措施，那么其顺序性无法保证。</li>
-</ul>
-</li>
-<li>内存屏障：内存屏障，又称内存栅栏，是一个CPU指令，基本上它是一条这样的指令，保证特定操作的执行顺序，影响某些数据（或则是某条指令的执行结果）的内存可见性。</li>
-</ul>
+<p>高速缓存解决了硬件效率问题，但是引入了一个新的问题：<strong>缓存一致性（Cache Coherence）</strong>。在多处理器系统中，每个处理器都有自己的高速缓存，而它们又共享同一主内存，当多个处理器的运算任务都涉及同一块主内存区域时，将可能导致各自的缓存数据不一致。为了解决缓存一致性问题，需要各个处理器访问缓存时都遵循一些协议，在读写时要根据协议来进行操作。</p>
+<h5 id="指令重排"><a href="#指令重排" class="headerlink" title="指令重排"></a>指令重排</h5><p><strong>除了高速缓存以外，为了使得处理器内部的运算单元尽量被充分利用</strong>，处理器可能会对输入代码进行乱序执行（Out-Of-Order Execution）优化。编译器优化重排序，编译器在不改变单线程程序语义的前提下，可以重新安排语句的执行顺序。指令级并行重排序，处理器采用了<code>指令级并行技术</code>来将多条指令重叠执行，如果不存在数据依赖性，处理器可以改变语句对应机器指令的执行顺序。内存系统重排序，由于处理器使用缓存和读/写缓冲区，这使得加载和存储操作看上去可能是在乱序执行。</p>
+<p>处理器会在计算之后将乱序执行的结果重组，<strong>保证该结果与顺序执行的结果是一致的</strong>，但不保证程序中各个语句计算的先后顺序与输入代码中的顺序一致。编译器和处理器不会改变存在数据依赖性关系的两个操作的执行顺序，即不会重排序，这称为数据依赖性。不管怎么重排序，单线程下的执行结果不能被改变，编译器、runtime和处理器都必须遵守as-if-serial语义。</p>
+<p>乱序执行技术是处理器为提高运算速度而做出违背代码原有顺序的优化。<strong>单核</strong>环境下，处理器保证做出的优化不会导致执行结果远离预期目标，但在多核环境下却并非如此。<strong>多核</strong>环境下， 如果存在一个核的计算任务依赖另一个核的计算任务的中间结果，而且对相关数据读写没做任何防护措施，那么其顺序性无法保证。</p>
+<p>内存屏障，又称内存栅栏，是一个CPU指令，基本上它是一条这样的指令，保证特定操作的执行顺序，影响某些数据（或则是某条指令的执行结果）的内存可见性。</p>
 <p><img src="/2021/01/02/java-jmm/headware-cpu-instruct-rearrange.png" alt="硬件指令重排"></p>
 <h4 id="Java内存模型"><a href="#Java内存模型" class="headerlink" title="Java内存模型"></a>Java内存模型</h4><h5 id="硬件内存模型的桥接"><a href="#硬件内存模型的桥接" class="headerlink" title="硬件内存模型的桥接"></a>硬件内存模型的桥接</h5><p><img src="/2021/01/02/java-jmm/headware-java-memory.png" alt="硬件和Java内存映射"></p>
-<ul>
-<li>Java内存模型与硬件内存架构之间存在差异。</li>
-<li>硬件内存架构没有区分线程栈和堆。对于硬件，所有的线程栈和堆都分布在主内存中。</li>
-<li>部分线程栈和堆可能有时候会出现在CPU缓存中和CPU内部的寄存器中。</li>
-</ul>
+<p>Java内存模型与硬件内存架构之间存在差异。硬件内存架构没有区分线程栈和堆。对于硬件，所有的线程栈和堆都分布在主内存中。部分线程栈和堆可能有时候会出现在CPU缓存中和CPU内部的寄存器中。</p>
 <h5 id="主内存和工作内存"><a href="#主内存和工作内存" class="headerlink" title="主内存和工作内存"></a>主内存和工作内存</h5><p><img src="/2021/01/02/java-jmm/java-memory-main-work.png" alt="Java内存主存和工作内存"></p>
-<ul>
-<li>规定了<strong>所有的变量都存储在主内存（Main Memory）中</strong>。</li>
-<li>每条线程还有自己的工作内存（Working Memory），<strong>工作内存中保留了该线程使用到的变量的主内存的副本</strong>。</li>
-<li>工作内存是 JMM 的一个抽象概念，并不真实存在，它涵盖了缓存，写缓冲区，寄存器以及其他的硬件和编译器优化。</li>
-<li>线程对变量的所有操作都必须在工作内存中进行，而不能直接读写主内存中的变量。</li>
-<li>不同的线程间也无法直接访问对方工作内存中的变量，<strong>线程间变量值的传递均需要通过主内存来完成</strong>。</li>
-</ul>
+<p>规定<strong>所有的变量都存储在主内存（Main Memory）中</strong>。每条线程还有自己的工作内存（Working Memory），<strong>工作内存中保留了该线程使用到的变量的主内存的副本</strong>。工作内存是 JMM 的一个抽象概念，并不真实存在，它涵盖了缓存，写缓冲区，寄存器以及其他的硬件和编译器优化。线程对变量的所有操作都必须在工作内存中进行，而不能直接读写主内存中的变量。不同的线程间也无法直接访问对方工作内存中的变量，<strong>线程间变量值的传递均需要通过主内存来完成</strong>。</p>
 <h5 id="内存交互操作"><a href="#内存交互操作" class="headerlink" title="内存交互操作"></a>内存交互操作</h5><p><img src="/2021/01/02/java-jmm/java-memory-operation.png" alt="Java内存操作"></p>
 <ol>
 <li>lock（锁定）：作用于主内存的变量，把一个变量标识为一条线程独占状态。</li>
@@ -281,38 +257,16 @@
 <li>write（写入）：作用于主内存的变量，它把 store 操作从工作内存中一个变量的值传送到主内存的变量中。</li>
 </ol>
 <h5 id="内存操作问题"><a href="#内存操作问题" class="headerlink" title="内存操作问题"></a>内存操作问题</h5><p><strong>原子性：</strong></p>
-<ul>
-<li><strong>原子性即一个操作或者多个操作，要么全部执行（执行的过程不会被任何因素打断），要么就都不执行</strong>。</li>
-<li>即使在多个线程一起执行的时候，一个操作一旦开始，就不会被其他线程所干扰。</li>
-<li>在 Java 中可以使用 <code>synchronized</code> 来保证方法和代码块内的操作是原子性的。</li>
-</ul>
+<p><strong>原子性即一个操作或者多个操作，要么全部执行（执行的过程不会被任何因素打断），要么就都不执行</strong>。即使在多个线程一起执行的时候，一个操作一旦开始，就不会被其他线程所干扰。在 Java 中可以使用 <code>synchronized</code> 来保证方法和代码块内的操作是原子性的。</p>
 <p><strong>有序性：</strong></p>
-<ul>
-<li>有序性规则表现在以下两种场景: 线程内和线程间<ul>
-<li>线程内 - 从某个线程的角度看方法的执行，指令会按照一种叫“串行”（<code>as-if-serial</code>）的方式执行，此种方式已经应用于顺序编程语言。</li>
-<li>线程间 - 这个线程“观察”到其他线程并发地执行非同步的代码时，由于指令重排序优化，任何代码都有可能交叉执行。唯一起作用的约束是：对于同步方法，同步块（<code>synchronized</code> 关键字修饰）以及 <code>volatile</code> 字段的操作仍维持相对有序。</li>
-</ul>
-</li>
-<li>多线程保证有序性：<ul>
-<li><code>volatile</code> 关键字会禁止指令重排序。</li>
-<li><code>synchronized</code> 关键字通过互斥保证同一时刻只允许一条线程操作。</li>
-</ul>
-</li>
-</ul>
+<p>有序性规则表现在以下两种场景: 线程内和线程间。线程内，从某个线程的角度看方法的执行，指令会按照一种叫“串行”（<code>as-if-serial</code>）的方式执行，此种方式已经应用于顺序编程语言。线程间，这个线程“观察”到其他线程并发地执行非同步的代码时，由于指令重排序优化，任何代码都有可能交叉执行。唯一起作用的约束是：对于同步方法，同步块（<code>synchronized</code> 关键字修饰）以及 <code>volatile</code> 字段的操作仍维持相对有序。</p>
+<p>多线程保证有序性：<code>volatile</code> 关键字会禁止指令重排序。<code>synchronized</code> 关键字通过互斥保证同一时刻只允许一条线程操作。</p>
 <p><strong>可见性：</strong></p>
+<p><strong>可见性是指当多个线程访问同一个变量时，一个线程修改了这个变量的值，其他线程能够立即看得到修改的值</strong>。JMM 是通过 <strong>“变量修改后将新值同步回主内存</strong>， <strong>变量读取前从主内存刷新变量值”</strong> 这种依赖主内存作为传递媒介的方式来实现的。</p>
+<p>Java 实现多线程可见性的方式有：<code>volatile</code>、<code>synchronized</code>、<code>final</code>。</p>
+<h4 id="内存模型规则"><a href="#内存模型规则" class="headerlink" title="内存模型规则"></a>内存模型规则</h4><h5 id="happens-before"><a href="#happens-before" class="headerlink" title="happens-before"></a>happens-before</h5><p>JMM 为了保证有序，还内置了一套先行发生规则（happens-before）两个操作间具有 happens-before 关系。并不意味着前一个操作必须要在后一个操作之前执行，happens-before 仅仅要求前一个操作对后一个操作可见，和一般意义上时间的先后是不一样的，达到逻辑上的顺序执行即可。如果两个操作的执行顺序不能通过 happens-before 原则推导出来，就不能保证他们的执行次序，虚拟机就可以随意的对他们进行重排序。</p>
+<p>具体的规则如下：</p>
 <ul>
-<li><p><strong>可见性是指当多个线程访问同一个变量时，一个线程修改了这个变量的值，其他线程能够立即看得到修改的值</strong>。</p>
-</li>
-<li><p>JMM 是通过 <strong>“变量修改后将新值同步回主内存</strong>， <strong>变量读取前从主内存刷新变量值”</strong> 这种依赖主内存作为传递媒介的方式来实现的。</p>
-</li>
-<li><p>Java 实现多线程可见性的方式有：<code>volatile</code>、<code>synchronized</code>、<code>final</code>。</p>
-</li>
-</ul>
-<h4 id="内存模型规则"><a href="#内存模型规则" class="headerlink" title="内存模型规则"></a>内存模型规则</h4><h5 id="happens-before"><a href="#happens-before" class="headerlink" title="happens-before"></a>happens-before</h5><ul>
-<li>JMM 为了保证有序，还内置了一套先行发生规则（happens-before）两个操作间具有 happens-before 关系。</li>
-<li>并不意味着前一个操作必须要在后一个操作之前执行。</li>
-<li>happens-before 仅仅要求前一个操作对后一个操作可见，和一般意义上时间的先后是不一样的，达到逻辑上的顺序执行即可。</li>
-<li>具体的规则如下：<ul>
 <li>程序次序规则：一个线程内，按照代码顺序，书写在前面的操作先行发生与书写在后面的操作。【保证单线程的有序】</li>
 <li>锁定规则：一个 unlock 操作先行发生于后面对同一个锁的 lock 操作。</li>
 <li>volatile 变量规则：对一个变量的写操作先行发生于后面对这个变量的读操作。【先写后读】</li>
@@ -322,21 +276,15 @@
 <li>线程终结规则：线程中所有的操作都先行发生于线程的终止检测，我们可以通过 Thread.join() 方法结束，Thread.isAlive() 的返回值手段检测线程已经终止执行。</li>
 <li>对象终结规则：一个对象的初始化完成先行发生于它的 finalize 方法的开始。</li>
 </ul>
-</li>
-<li>如果两个操作的执行顺序不能通过 happens-before 原则推导出来，就不能保证他们的执行次序，虚拟机就可以随意的对他们进行重排序。</li>
-</ul>
-<h5 id="内存屏障"><a href="#内存屏障" class="headerlink" title="内存屏障"></a>内存屏障</h5><ul>
-<li>内存屏障是被插入两个 CPU 指令之间的一种指令，用来禁止处理器指令发生重排序（像屏障一样），从而保障<strong>有序性</strong>的。</li>
-<li>另外，为了达到屏障的效果，它也会使处理器写入、读取值之前，将主内存的值写入高速缓存，清空无效队列，从而保障<strong>可见性</strong>。</li>
-<li>常见有 4 种屏障：<ul>
+<h5 id="内存屏障"><a href="#内存屏障" class="headerlink" title="内存屏障"></a>内存屏障</h5><p>内存屏障是被插入两个 CPU 指令之间的一种指令，用来禁止处理器指令发生重排序（像屏障一样），从而保障<strong>有序性</strong>的。另外，为了达到屏障的效果，它也会使处理器写入、读取值之前，将主内存的值写入高速缓存，清空无效队列，从而保障<strong>可见性</strong>。</p>
+<p>常见有 4 种屏障：</p>
+<ul>
 <li><code>LoadLoad</code> 屏障 - 对于这样的语句 <code>Load1; LoadLoad; Load2</code>，在 Load2 及后续读取操作要读取的数据被访问前，保证 Load1 要读取的数据被读取完毕。</li>
 <li><code>StoreStore</code> 屏障 - 对于这样的语句 <code>Store1; StoreStore; Store2</code>，在 Store2 及后续写入操作执行前，保证 Store1 的写入操作对其它处理器可见。</li>
 <li><code>LoadStore</code> 屏障 - 对于这样的语句 <code>Load1; LoadStore; Store2</code>，在 Store2 及后续写入操作被执行前，保证 Load1 要读取的数据被读取完毕。</li>
 <li><code>StoreLoad</code> 屏障 - 对于这样的语句 <code>Store1; StoreLoad; Load2</code>，在 Load2 及后续所有读取操作执行前，保证 Store1 的写入对所有处理器可见。它的开销是四种屏障中最大的（冲刷写缓冲器，清空无效化队列）。在大多数处理器的实现中，这个屏障是个万能屏障，兼具其它三种内存屏障的功能。</li>
 </ul>
-</li>
-<li>Java 中对内存屏障的使用在一般的代码中不太容易见到，常见的有 <code>volatile</code> 和 <code>synchronized</code> 关键字修饰的代码块(后面再展开介绍)，还可以通过 <code>Unsafe</code> 这个类来使用内存屏障。</li>
-</ul>
+<p>Java 中对内存屏障的使用在一般的代码中不太容易见到，常见的有 <code>volatile</code> 和 <code>synchronized</code> 关键字修饰的代码块(后面再展开介绍)，还可以通过 <code>Unsafe</code> 这个类来使用内存屏障。</p>
 <h3 id="volatile"><a href="#volatile" class="headerlink" title="volatile"></a>volatile</h3><h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><p>被volatile修饰之后，那么就具备了两层语义：首先保证了不同线程对这个变量进行操作时的可见性，即一个线程修改了某个变量的值，这新值对其他线程来说是立即可见的；其次禁止进行指令重排序。</p>
 <p>前面讲述了源于volatile关键字的一些使用，下面我们来探讨一下volatile到底如何保证可见性和禁止指令重排序的。观察加入volatile关键字和没有加入volatile关键字时所生成的汇编代码发现，加入volatile关键字时，会多出一个lock前缀指令。lock前缀指令实际上相当于一个内存屏障（也成内存栅栏），内存屏障会提供3个功能：首先它确保指令重排序时不会把其后面的指令排到内存屏障之前的位置，也不会把前面的指令排到内存屏障的后面；其次它会强制将对缓存的修改操作立即写入主存；如果是写操作，它会导致其他CPU中对应的缓存行无效。</p>
 <p>JMM会在写入这个volatile字段之后插进一个<code>Write-Barrier</code>指令，并在读这个字段之前插入一个<code>Read-Barrier</code>指令。</p>
